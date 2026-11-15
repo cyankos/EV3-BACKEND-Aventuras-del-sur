@@ -1,0 +1,13 @@
+REPOSITORIO GIT — EVA 3 PROGRAMACIÓN BACK END
+
+El proyecto se entrega con .gitignore y estructura lista para Git.
+Antes de entregar, crear/subir el repositorio con:
+
+git init
+git add .
+git commit -m "EVA 3 Programacion Back End - Juan Rivano y Maximiliano Vedurgo"
+
+Luego agregar el remoto indicado por el profesor y hacer push.
+
+URL DEL REPOSITORIO REMOTO:
+______________________________________________

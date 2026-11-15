@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Aventuras del Sur{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm py-3">
+    <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{% url 'inicio' %}">
+            <i class="bi bi-tree-fill fs-4"></i>
+            <span>Aventuras del Sur</span>
+        </a>
+        <div class="ms-auto d-flex align-items-center gap-3">
+            <a class="nav-link text-white fw-medium" href="{% url 'inicio' %}">Inicio</a>
+            <a class="nav-link text-white fw-medium" href="{% url 'catalogo' %}">Experiencias</a>
+            {% if user.is_authenticated %}
+                <a class="btn btn-light text-success fw-semibold px-3" href="{% url 'panel' %}">
+                    <i class="bi bi-speedometer2 me-1"></i> Mi panel
+                </a>
+            {% else %}
+                <a class="btn btn-light text-success fw-semibold px-3" href="{% url 'login' %}">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Ingresar
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags|default:'info' }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+<main class="flex-grow-1">
+    {% block content %}{% endblock %}
+</main>
+<footer class="bg-dark text-white py-4 mt-auto">
+    <div class="container text-center">
+        Ecoparque y Reserva Natural “Aventuras del Sur” · Plataforma de experiencias
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'panel/base_panel.html' %}
+{% block content %}
+<h1 class="h3 mb-4 text-gray-800">{% if user.rol == 'guia' %}Inscripciones a mis experiencias{% else %}Reservas del sistema{% endif %}</h1>
+<div class="card shadow"><div class="card-body"><div class="table-responsive">
+<table class="table table-bordered datatable">
+<thead><tr><th>Turista</th><th>Experiencia</th><th>Guía</th><th>Fecha inscripción</th><th>Pago</th>{% if user.is_superuser or user.rol == 'admin' %}<th>Acciones</th>{% endif %}</tr></thead>
+<tbody>{% for r in reservas %}
+<tr>
+<td>{{ r.usuario.username }}</td><td>{{ r.experiencia.titulo }}</td><td>{{ r.experiencia.creador.username }}</td>
+<td>{{ r.fecha_inscripcion|date:"d/m/Y H:i" }}</td><td>{{ r.get_estado_pago_display }}</td>
+{% if user.is_superuser or user.rol == 'admin' %}
+<td><a class="btn btn-warning btn-sm" href="{% url 'reserva_update' r.pk %}">Pago</a>
+<a class="btn btn-danger btn-sm" href="{% url 'reserva_delete' r.pk %}">Eliminar</a></td>
+{% endif %}
+</tr>{% endfor %}</tbody>
+</table></div></div></div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'panel/base_panel.html' %}
+{% block content %}
+<h1 class="h3 mb-4 text-gray-800">Mis reservas</h1>
+<div class="card shadow"><div class="card-body"><div class="table-responsive">
+<table class="table table-bordered datatable">
+<thead><tr><th>Experiencia</th><th>Categoría</th><th>Fecha actividad</th><th>Inscripción</th><th>Pago</th></tr></thead>
+<tbody>{% for r in reservas %}
+<tr><td>{{ r.experiencia.titulo }}</td><td>{{ r.experiencia.categoria }}</td><td>{{ r.experiencia.fecha_hora|date:"d/m/Y H:i" }}</td><td>{{ r.fecha_inscripcion|date:"d/m/Y H:i" }}</td><td>{{ r.get_estado_pago_display }}</td></tr>
+{% endfor %}</tbody>
+</table></div></div></div>
+{% endblock %}

@@ -1,0 +1,31 @@
+CREDENCIALES DE PRUEBA — EVA 3 PROGRAMACIÓN BACK END
+
+Proyecto: Aventuras del Sur / inventarioAventura
+Integrantes: Juan Rivano - Maximiliano Vedurgo
+
+ADMINISTRADOR
+Usuario: admin
+Contraseña: Admin123!
+
+GUÍA / OPERADOR 1
+Usuario: guia1
+Contraseña: Guia123!
+
+GUÍA / OPERADOR 2
+Usuario: guia2
+Contraseña: Guia123!
+
+TURISTA / CLIENTE 1
+Usuario: turista1
+Contraseña: Turista123!
+
+TURISTA / CLIENTE 2
+Usuario: turista2
+Contraseña: Turista123!
+
+RUTAS PRINCIPALES
+Inicio: http://127.0.0.1:8000/
+Login: http://127.0.0.1:8000/cuentas/login/
+Panel: http://127.0.0.1:8000/panel/
+Catálogo: http://127.0.0.1:8000/experiencias/
+Admin Django: http://127.0.0.1:8000/admin/

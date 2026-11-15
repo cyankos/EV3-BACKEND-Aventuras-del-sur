@@ -1,0 +1,70 @@
+{% extends 'base_public.html' %}
+{% block title %}Inicio | Aventuras del Sur{% endblock %}
+{% block content %}
+<section class="hero-aventura text-white py-5">
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3">Aventuras del Sur</h1>
+                <p class="lead mb-4">
+                    Sistema de reservas y arriendo de equipamiento para salidas de trekking, canopy y kayak en la zona de Villarrica y Pucón.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{% url 'catalogo' %}" class="btn btn-warning fw-semibold px-4 py-2">
+                        Ver catálogo de experiencias
+                    </a>
+                    {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-light px-4 py-2">
+                        Ingresar al sistema
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="h3 fw-bold mb-1">Experiencias disponibles</h2>
+            <p class="text-muted mb-0">Salidas programadas con cupos abiertos.</p>
+        </div>
+        <a href="{% url 'catalogo' %}" class="btn btn-outline-success btn-sm">
+            Ver todas
+        </a>
+    </div>
+    <div class="row g-4">
+        {% for exp in experiencias %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body d-flex flex-column p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-success-subtle text-success border border-success-subtle">
+                            {{ exp.categoria.nombre }}
+                        </span>
+                        <small class="text-muted">{{ exp.cupos_disponibles }} cupos</small>
+                    </div>
+                    <h3 class="h5 fw-bold mb-2">{{ exp.titulo }}</h3>
+                    <p class="text-muted small flex-grow-1">{{ exp.descripcion|truncatechars:110 }}</p>
+                    <hr class="my-3 opacity-25">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="fw-bold fs-5 text-dark">${{ exp.precio|floatformat:0 }}</div>
+                            <small class="text-muted">{{ exp.fecha_hora|date:"d/m/Y H:i" }}</small>
+                        </div>
+                        <a href="{% url 'catalogo' %}" class="btn btn-sm btn-outline-success">
+                            Reservar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning">No hay experiencias activas en este momento.</div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

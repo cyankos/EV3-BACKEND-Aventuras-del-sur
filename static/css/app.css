@@ -1,0 +1,42 @@
+.hero-aventura {
+    background: linear-gradient(135deg, #14532d 0%, #198754 100%);
+}
+
+form p {
+    margin-bottom: 1rem;
+}
+
+form p label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+}
+
+form p input[type="text"],
+form p input[type="email"],
+form p input[type="password"],
+form p input[type="number"],
+form p input[type="datetime-local"],
+form p select,
+form p textarea {
+    display: block;
+    width: 100%;
+    padding: 0.45rem 0.75rem;
+    font-size: 1rem;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #d1d3e2;
+    border-radius: 0.35rem;
+}
+
+form p input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.4rem;
+}
+
+form p .helptext {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}

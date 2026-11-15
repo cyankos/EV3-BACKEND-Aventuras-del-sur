@@ -1,0 +1,12 @@
+{% extends 'panel/base_panel.html' %}
+{% block content %}
+<div class="card shadow"><div class="card-body">
+<h1 class="h4">Eliminar usuario</h1>
+<p>¿Eliminar a <strong>{{ object.username }}</strong>?</p>
+<div class="alert alert-warning">Esta acción es permanente. Si el usuario es un guía, también se eliminarán sus experiencias y las reservas asociadas.</div>
+<form method="post">{% csrf_token %}
+<button class="btn btn-danger">Eliminar</button>
+<a class="btn btn-secondary" href="{% url 'usuario_list' %}">Cancelar</a>
+</form>
+</div></div>
+{% endblock %}

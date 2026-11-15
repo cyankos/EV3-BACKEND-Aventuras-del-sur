@@ -1,0 +1,15 @@
+{% extends 'panel/base_panel.html' %}
+{% block content %}
+<div class="card shadow">
+  <div class="card-body">
+    <h1 class="h4">{{ titulo }}</h1>
+    <p>¿Confirmas eliminar <strong>{{ object }}</strong>?</p>
+    <div class="alert alert-warning">Esta acción es permanente. Si el registro tiene datos relacionados, también se eliminarán para mantener la base de datos consistente.</div>
+    <form method="post">
+      {% csrf_token %}
+      <button class="btn btn-danger">Eliminar</button>
+      <a class="btn btn-secondary" href="javascript:history.back()">Cancelar</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

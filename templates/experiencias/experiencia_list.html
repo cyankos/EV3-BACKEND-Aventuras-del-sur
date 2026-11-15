@@ -1,0 +1,22 @@
+{% extends 'panel/base_panel.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3 text-gray-800">{% if user.rol == 'guia' %}Mis experiencias{% else %}Gestión de experiencias{% endif %}</h1>
+  <a class="btn btn-success" href="{% url 'experiencia_create' %}">Nueva experiencia</a>
+</div>
+<div class="card shadow"><div class="card-body"><div class="table-responsive">
+<table class="table table-bordered datatable">
+<thead><tr><th>Título</th><th>Categoría</th><th>Precio</th><th>Cupo</th><th>Fecha</th><th>Creador</th><th>Acciones</th></tr></thead>
+<tbody>{% for e in experiencias %}
+<tr>
+<td>{{ e.titulo }}</td><td>{{ e.categoria }}</td><td>${{ e.precio|floatformat:0 }}</td><td>{{ e.cupo_maximo }}</td>
+<td>{{ e.fecha_hora|date:"d/m/Y H:i" }}</td><td>{{ e.creador.username }}</td>
+<td>
+<a class="btn btn-warning btn-sm" href="{% url 'experiencia_update' e.pk %}">Editar</a>
+{% if user.is_superuser or user.rol == 'admin' %}
+<a class="btn btn-danger btn-sm" href="{% url 'experiencia_delete' e.pk %}">Eliminar</a>
+{% endif %}
+</td>
+</tr>{% endfor %}</tbody>
+</table></div></div></div>
+{% endblock %}
