@@ -12,7 +12,7 @@ class UsuarioCrearForm(UserCreationForm):
             "first_name": forms.TextInput(attrs={"class": "form-control"}),
             "last_name": forms.TextInput(attrs={"class": "form-control"}),
             "email": forms.EmailInput(attrs={"class": "form-control"}),
-            "rol": forms.Select(attrs={"class": "form-select"}),
+            "rol": forms.Select(attrs={"class": "form-control"}),
             "is_active": forms.CheckboxInput(attrs={"class": "form-check-input"}),
         }
 
@@ -31,6 +31,27 @@ class UsuarioEditarForm(forms.ModelForm):
             "first_name": forms.TextInput(attrs={"class": "form-control"}),
             "last_name": forms.TextInput(attrs={"class": "form-control"}),
             "email": forms.EmailInput(attrs={"class": "form-control"}),
-            "rol": forms.Select(attrs={"class": "form-select"}),
+            "rol": forms.Select(attrs={"class": "form-control"}),
             "is_active": forms.CheckboxInput(attrs={"class": "form-check-input"}),
         }
+
+
+class RegistroTuristaForm(UsuarioCrearForm):
+    class Meta(UsuarioCrearForm.Meta):
+        fields = ("username", "first_name", "last_name", "email")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["email"].required = True
+
+    def save(self, commit=True):
+        usuario = super().save(commit=False)
+        usuario.rol = Usuario.Rol.TURISTA
+        usuario.is_active = True
+        usuario.is_staff = False
+        usuario.is_superuser = False
+
+        if commit:
+            usuario.save()
+
+        return usuario

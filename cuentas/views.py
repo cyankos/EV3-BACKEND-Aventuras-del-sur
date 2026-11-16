@@ -1,8 +1,10 @@
 from django.contrib import messages
+from django.contrib.auth import login
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from .forms import UsuarioCrearForm, UsuarioEditarForm
+from .forms import UsuarioCrearForm, UsuarioEditarForm, RegistroTuristaForm
 from .mixins import AdminRequiredMixin
 from .models import Usuario
 
@@ -45,5 +47,26 @@ class UsuarioDeleteView(AdminRequiredMixin, DeleteView):
         if self.object.pk == self.request.user.pk:
             messages.error(self.request, "No puedes eliminar tu propia cuenta.")
             return self.get(self.request)
+
         messages.success(self.request, "Usuario eliminado.")
         return super().form_valid(form)
+
+
+class RegistroTuristaView(CreateView):
+    form_class = RegistroTuristaForm
+    template_name = "registration/registro.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect("panel")
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        login(self.request, self.object)
+        messages.success(
+            self.request,
+            "Tu cuenta de turista fue creada correctamente.",
+        )
+        return redirect("panel")
