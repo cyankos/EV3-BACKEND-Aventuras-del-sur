@@ -1,20 +1,39 @@
 {% extends 'panel/base_panel.html' %}
+
 {% block content %}
+<style>
+  .usuario-form .form-check-input {
+    position: static;
+    margin: 0 6px 0 0;
+  }
+</style>
+
 <div class="row justify-content-center">
   <div class="col-lg-8">
     <div class="card shadow mb-4">
       <div class="card-header py-3">
         <h1 class="h5 m-0 font-weight-bold text-success">Usuario</h1>
       </div>
+
       <div class="card-body">
-        <form method="post">
+        <form method="post" class="usuario-form">
           {% csrf_token %}
           {{ form.as_p }}
+
           <button class="btn btn-success" type="submit">Guardar</button>
-          <a class="btn btn-secondary" href="{% url 'usuario_list' %}">Volver</a>
+          <a class="btn btn-secondary" href="{% url 'usuario_list' %}">
+            Volver
+          </a>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  document.querySelectorAll('.usuario-form select').forEach(function (select) {
+    select.classList.remove('form-select');
+    select.classList.add('form-control');
+  });
+</script>
 {% endblock %}
